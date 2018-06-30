@@ -41,6 +41,87 @@ namespace DataStructures.Tests
         }
 
         [Fact]
+        public void AfterRemove_FirstItem_CollectionShouldStillEnumerate()
+        {
+            Instance.Add(1);
+            Instance.Add(2);
+            Instance.Add(3);
+            Instance.Remove(1);
+
+            Assert.Equal(new[] {2, 3}, Instance);
+        }
+
+        [Fact]
+        public void AfterRemove_LastItem_CollectionShouldStillEnumerate()
+        {
+            Instance.Add(1);
+            Instance.Add(2);
+            Instance.Add(3);
+            Instance.Remove(3);
+
+            Assert.Equal(new[] {1, 2}, Instance);
+        }
+
+        [Fact]
+        public void AfterRemove_MiddleItem_CollectionShouldStillEnumerate()
+        {
+            Instance.Add(1);
+            Instance.Add(2);
+            Instance.Add(3);
+            Instance.Remove(2);
+
+            Assert.Equal(new[] {1, 3}, Instance);
+        }
+
+        [Fact]
+        public void AfterRemove_ShouldDecreaseCountByOne()
+        {
+            Instance.Add(1);
+            Instance.Add(2);
+            Instance.Add(3);
+
+            Instance.Remove(2);
+
+            Assert.Equal(2, Instance.Count);
+        }
+
+        [Fact]
+        public void AfterRemove_ShouldReturnFalseIfTheItemIsNotFound()
+        {
+            Instance.Add(1);
+            Instance.Add(2);
+            Instance.Add(3);
+
+            var result = Instance.Remove(4);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void AfterRemove_ShouldReturnTrueIfTheItemIsFound()
+        {
+            Instance.Add(1);
+            Instance.Add(2);
+            Instance.Add(3);
+
+            var result = Instance.Remove(2);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void AfterRemove_ThenAdd_CollectionShouldStillEnumerate()
+        {
+            Instance.Add(1);
+            Instance.Add(2);
+            Instance.Add(3);
+            Instance.Remove(2);
+            Instance.Add(4);
+
+            Assert.Equal(new[] {1, 3, 4}, Instance);
+        }
+
+        [Fact]
         public void IfItemDoesNotExistInCollection_ContainsShouldReturnFalse()
         {
             Instance.Add(1);
@@ -62,42 +143,6 @@ namespace DataStructures.Tests
             var exists = Instance.Contains(2);
 
             Assert.True(exists);
-        }
-
-        [Fact]
-        public void Remove_ShouldDecreaseCountByOne()
-        {
-            Instance.Add(1);
-            Instance.Add(2);
-            Instance.Add(3);
-
-            Instance.Remove(2);
-
-            Assert.Equal(2, Instance.Count);
-        }
-
-        [Fact]
-        public void Remove_ShouldReturnFalseIfTheItemIsNotFound()
-        {
-            Instance.Add(1);
-            Instance.Add(2);
-            Instance.Add(3);
-
-            var result = Instance.Remove(4);
-
-            Assert.False(result);
-        }
-
-        [Fact]
-        public void Remove_ShouldReturnTrueIfTheItemIsFound()
-        {
-            Instance.Add(1);
-            Instance.Add(2);
-            Instance.Add(3);
-
-            var result = Instance.Remove(2);
-
-            Assert.True(result);
         }
 
         [Fact]
