@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FluentAssertions;
 using Xunit;
 
 namespace DataStructures.Tests
@@ -12,20 +13,23 @@ namespace DataStructures.Tests
         {
             Instance.Add(1);
 
-            Assert.Equal(1, Instance.Count);
+            Instance.Count.Should().Be(1);
         }
 
         [Fact]
         public void AfterAddingMultipleItems_CountShouldReturnThatNumberOfItems()
         {
-            Instance.Add(1);
-            Instance.Add(2);
-            Instance.Add(1);
+            Instance.Add(8);
             Instance.Add(3);
+            Instance.Add(10);
+            Instance.Add(1);
+            Instance.Add(6);
+            Instance.Add(14);
             Instance.Add(4);
-            Instance.Add(9999);
+            Instance.Add(7);
+            Instance.Add(13);
 
-            Assert.Equal(6, Instance.Count);
+            Instance.Count.Should().Be(9);
         }
 
         [Fact]
@@ -37,7 +41,7 @@ namespace DataStructures.Tests
 
             Instance.Clear();
 
-            Assert.Equal(0, Instance.Count);
+            Instance.Count.Should().Be(0);
         }
 
         [Fact]
@@ -48,7 +52,7 @@ namespace DataStructures.Tests
             Instance.Add(3);
             Instance.Remove(1);
 
-            Assert.Equal(new[] {2, 3}, Instance);
+            Instance.Should().BeEquivalentTo(new[] {2, 3});
         }
 
         [Fact]
@@ -59,7 +63,7 @@ namespace DataStructures.Tests
             Instance.Add(3);
             Instance.Remove(3);
 
-            Assert.Equal(new[] {1, 2}, Instance);
+            Instance.Should().BeEquivalentTo(new[] {1, 2});
         }
 
         [Fact]
@@ -70,7 +74,7 @@ namespace DataStructures.Tests
             Instance.Add(3);
             Instance.Remove(2);
 
-            Assert.Equal(new[] {1, 3}, Instance);
+            Instance.Should().BeEquivalentTo(new[] {1, 3});
         }
 
         [Fact]
@@ -82,7 +86,7 @@ namespace DataStructures.Tests
 
             Instance.Remove(2);
 
-            Assert.Equal(2, Instance.Count);
+            Instance.Count.Should().Be(2);
         }
 
         [Fact]
@@ -94,7 +98,7 @@ namespace DataStructures.Tests
 
             var result = Instance.Remove(4);
 
-            Assert.False(result);
+            result.Should().BeFalse();
         }
 
         [Fact]
@@ -106,7 +110,7 @@ namespace DataStructures.Tests
 
             var result = Instance.Remove(2);
 
-            Assert.True(result);
+            result.Should().BeTrue();
         }
 
         [Fact]
@@ -118,7 +122,7 @@ namespace DataStructures.Tests
             Instance.Remove(2);
             Instance.Add(4);
 
-            Assert.Equal(new[] {1, 3, 4}, Instance);
+            Instance.Should().BeEquivalentTo(new[] {1, 3, 4});
         }
 
         [Fact]
@@ -130,7 +134,7 @@ namespace DataStructures.Tests
 
             var exists = Instance.Contains(4);
 
-            Assert.False(exists);
+            exists.Should().BeFalse();
         }
 
         [Fact]
@@ -142,13 +146,13 @@ namespace DataStructures.Tests
 
             var exists = Instance.Contains(2);
 
-            Assert.True(exists);
+            exists.Should().BeTrue();
         }
 
         [Fact]
         public void ShouldBeInitiallyEmpty()
         {
-            Assert.Equal(0, Instance.Count);
+            Instance.Count.Should().Be(0);
         }
 
         [Fact]
@@ -158,7 +162,7 @@ namespace DataStructures.Tests
             Instance.Add(2);
             Instance.Add(3);
 
-            Assert.Equal(new[] {1, 2, 3}, Instance);
+            Instance.Should().BeEquivalentTo(new[] {1, 2, 3});
         }
     }
 }
