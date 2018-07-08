@@ -23,7 +23,7 @@ namespace DataStructures
             }
         }
 
-        public Node RootNode { get; set; }
+        public Node RootNode { get; private set; }
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
