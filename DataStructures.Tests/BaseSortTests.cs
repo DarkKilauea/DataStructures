@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -35,7 +34,7 @@ namespace DataStructures.Tests
         {
             var random = new Random();
             var source = Enumerable.Repeat(0, 1_000_000)
-                .Select(_ => random.Next(1000))
+                .Select(_ => random.Next(100000))
                 .ToList();
             var expected = source
                 .OrderBy(x => x)
